@@ -235,7 +235,7 @@ def getactivitydetail():
 			#获取活动的海报
 			poster = activityimageAttach.query.filter_by(activityid = activityid,imageid = 0).first()
 			if poster != None:
-				image = "http://218.244.147.240:80/activity/activityimages/"+ str(activityid)+'-'+'0'
+				image = baseUrl+"/activity/activityimages/"+ str(activityid)+'-'+'0'
 			else:
 				image = ""
 			result = {'id':act.id,'author':author,'authorid':authorid,'school':school,'gender':gender,'title':title,'time':time,'location':location,'number':number,'signnumber':signnumber,'remark':remark,'state':signstate,'detail':detail,'advertise':advertise,'whetherimage':whetherimage,'likeflag':flag,"imageurl":image,'timestate':timestate,'sponsor':sponsor,'top':top}

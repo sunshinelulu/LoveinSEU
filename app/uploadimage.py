@@ -7,7 +7,7 @@ from PIL import Image, ExifTags, ImageOps
 import string
 import shutil
 import uuid
-
+from dbSetting import baseUrl
 upload_image = Blueprint('upload_image', __name__)
 
 
@@ -56,7 +56,7 @@ def uploadavatar():
 		u = getuserinformation(token)
 		id = u.id
 		result = {}
-		baseURL = "http://121.248.51.210:80"
+		#baseURL = "http://121.248.51.210:80"
 		try:
 			state = 'successful'
 			reason = ''
