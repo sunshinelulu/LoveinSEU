@@ -56,18 +56,19 @@ def uploadavatar():
 		u = getuserinformation(token)
 		id = u.id
 		result = {}
-		baseURL = "http://121.248.51.210"
+		baseURL = "http://121.248.51.210:80"
 		try:
 			state = 'successful'
 			reason = ''
 			if type=="0":
+				# type = 0表示上传用户头像
 				avatartmp = getavatarvoicebyuserid(id)
 				if avatartmp!=None:
 					avatarnumber = avatartmp.avatar_number if avatartmp.avatar_number != None else 0
 					avatarnumber = avatarnumber + 1
 					#路径
 					dst = '/home/www/avatar/' + str(id) + '-' + str(avatarnumber)
-					avatarurl = "http://218.244.147.240:80/avatar/" + str(id) + '-' + str(avatarnumber)
+					avatarurl = baseURL+"/avatar/" + str(id) + '-' + str(avatarnumber)
 					#更新数据库
 					avatartmp.avatar_number = avatarnumber
 					avatartmp.avatarurl = avatarurl
@@ -79,7 +80,7 @@ def uploadavatar():
 					avatarnumber = 1
 					#路径
 					dst = '/home/www/avatar/' + str(id) + '-' + str(avatarnumber)
-					avatarurl = "http://218.244.147.240:80/avatar/" + str(id) + '-' + str(avatarnumber)
+					avatarurl = baseURL+"/avatar/" + str(id) + '-' + str(avatarnumber)
 					#第一次上传头像，新增
 					tmp = avatarvoice(userid = id,avatarurl = avatarurl,avatar_number = avatarnumber,gender = u.gender,name = u.name)
 					tmp.add()
@@ -124,13 +125,13 @@ def uploadavatar():
 				#type = -5 表示上传topic的附图
 				topictemp = gettopicbyid(topicid)
 				dst = '/home/www/community/topics/' + str(topicid)
-				topictemp.imageurl = "http://218.244.147.240:80/community/topics/" + str(topicid)
+				topictemp.imageurl = baseURL+"/community/topics/" + str(topicid)
 				topictemp.add()
 			elif type == "-6":
 				#type = -6 表示上传topofficial的图片
 				topofficialtemp = gettopofficialbyid(topofficialid)
 				dst = '/home/www/community/topofficials/' + str(topofficialid)
-				topofficialtemp.imageurl = "http://218.244.147.240:80/community/topofficials/" + str(topofficialid)
+				topofficialtemp.imageurl = baseURL+"/community/topofficials/" + str(topofficialid)
 				topofficialtemp.add()
 			elif type == "-7":
 				#type = -7表示上传comment的图片附件
@@ -143,7 +144,7 @@ def uploadavatar():
 				#type = -8 表示上传activitytopofficial的图片
 				topofficialtemp = getactivitytopofficialbyid(topofficialid)
 				dst = '/home/www/activity/activitytopofficials/' + str(topofficialid)
-				topofficialtemp.imageurl = "http://218.244.147.240:80/activity/activitytopofficials/" + str(topofficialid)
+				topofficialtemp.imageurl = baseURL+"/activity/activitytopofficials/" + str(topofficialid)
 				topofficialtemp.add()
 			elif type == "-9":
 				#type = -9 表示上传活动activity的生活照
@@ -170,7 +171,7 @@ def uploadavatar():
 				foodcardid = string.atoi(str(jsonstring.get('foodcardid','0')))
 				tmpfoodcard = foodcard.query.filter_by(id = foodcardid).first()
 				dst = '/home/www/picture/foodcards/' + str(foodcardid) + '-' +str(id)
-				tmpfoodcard.imageurl = "http://218.244.147.240:80/picture/foodcards/" + str(foodcardid) + '-' +str(id)
+				tmpfoodcard.imageurl = baseURL+"/picture/foodcards/" + str(foodcardid) + '-' +str(id)
 				tmpfoodcard.add()
 			elif type == "-12":
 				#type ==12 表示上传个人声音名片
@@ -181,12 +182,12 @@ def uploadavatar():
 					dst = '/home/www/static/personalvoices/' + str(id) + "-" + str(voicenumber)
 					#更新数据库
 					voicetmp.voice_number = voicenumber
-					voicetmp.voiceurl = 'http://218.244.147.240:80/static/personalvoices/' + str(id) + "-" + str(voicenumber)
+					voicetmp.voiceurl = baseURL+"/static/personalvoices/' + str(id) + "-" + str(voicenumber)
 					voicetmp.add()
 				else:
 					voicenumber = 1
 					dst = '/home/www/static/personalvoices/' + str(id) + "-" + str(voicenumber)
-					voiceurl = 'http://218.244.147.240:80/static/personalvoices/' + str(id) + "-" + str(voicenumber)
+					voiceurl = baseURL+"/static/personalvoices/' + str(id) + "-" + str(voicenumber)
 					tmp = avatarvoice(userid = id,voice_number = voicenumber,voiceurl = voiceurl)
 					tmp.add()
 			elif type == "-13":
@@ -195,7 +196,7 @@ def uploadavatar():
 				dst = '/home/www/static/schoolcertifications/' + str(id) + "-" + str(certid)
 				tmp = schoolcertification.query.filter_by(id = certid).first()
 				if tmp!=None:
-					tmp.pictureurl = 'http://218.244.147.240:80/static/schoolcertifications/' + str(id) + "-" + str(certid)
+					tmp.pictureurl = baseURL+"/static/schoolcertifications/' + str(id) + "-" + str(certid)
 					tmp.add()
 				else:
 					state = 'fail'
@@ -213,7 +214,7 @@ def uploadavatar():
 				v2 = jsonstring.get('v2','0')
 				v3 = jsonstring.get('v3','0')
 				
-				wemeurl = 'http://218.244.147.240:80/static/androidapk/' + "weme_V"+ str(v1) + "." + str(v2) + "." + str(v3) + ".apk"
+				wemeurl = baseURL+"/static/androidapk/' + "weme_V"+ str(v1) + "." + str(v2) + "." + str(v3) + ".apk"
 				apk = androidversion.query.filter_by(v1 = v1,v2 = v2, v3 = v3).first()
 				if apk != None:
 					dst = '/home/www/picture/temp/' + "weme_V" + str(v1) + "." + str(v2) + "." + str(v3) + ".apk"
@@ -230,7 +231,7 @@ def uploadavatar():
 				#type = -16 表示上传生活照
 				suffix = str(uuid.uuid4())
 				dst = '/home/www/static/personalimages/' + str(id) + '_' + suffix
-				url = 'http://218.244.147.240:80/static/personalimages/' + str(id) + '_' + suffix
+				url = baseURL+"/static/personalimages/' + str(id) + '_' + suffix
 				thumbnail_url = url + "_thumbnail.jpg"
 				tmp = PersonalImage(userid=int(id), url=url, thumbnail_url = thumbnail_url)
 				tmp.add()
