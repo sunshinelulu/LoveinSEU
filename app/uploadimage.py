@@ -182,12 +182,12 @@ def uploadavatar():
 					dst = '/home/www/static/personalvoices/' + str(id) + "-" + str(voicenumber)
 					#更新数据库
 					voicetmp.voice_number = voicenumber
-					voicetmp.voiceurl = baseURL+"/static/personalvoices/' + str(id) + "-" + str(voicenumber)
+					voicetmp.voiceurl = baseURL+"/static/personalvoices/" + str(id) + "-" + str(voicenumber)
 					voicetmp.add()
 				else:
 					voicenumber = 1
 					dst = '/home/www/static/personalvoices/' + str(id) + "-" + str(voicenumber)
-					voiceurl = baseURL+"/static/personalvoices/' + str(id) + "-" + str(voicenumber)
+					voiceurl = baseURL+"/static/personalvoices/" + str(id) + "-" + str(voicenumber)
 					tmp = avatarvoice(userid = id,voice_number = voicenumber,voiceurl = voiceurl)
 					tmp.add()
 			elif type == "-13":
@@ -196,7 +196,7 @@ def uploadavatar():
 				dst = '/home/www/static/schoolcertifications/' + str(id) + "-" + str(certid)
 				tmp = schoolcertification.query.filter_by(id = certid).first()
 				if tmp!=None:
-					tmp.pictureurl = baseURL+"/static/schoolcertifications/' + str(id) + "-" + str(certid)
+					tmp.pictureurl = baseURL+"/static/schoolcertifications/" + str(id) + "-" + str(certid)
 					tmp.add()
 				else:
 					state = 'fail'
@@ -214,7 +214,7 @@ def uploadavatar():
 				v2 = jsonstring.get('v2','0')
 				v3 = jsonstring.get('v3','0')
 				
-				wemeurl = baseURL+"/static/androidapk/' + "weme_V"+ str(v1) + "." + str(v2) + "." + str(v3) + ".apk"
+				wemeurl = baseURL+"/static/androidapk/" + "weme_V"+ str(v1) + "." + str(v2) + "." + str(v3) + ".apk"
 				apk = androidversion.query.filter_by(v1 = v1,v2 = v2, v3 = v3).first()
 				if apk != None:
 					dst = '/home/www/picture/temp/' + "weme_V" + str(v1) + "." + str(v2) + "." + str(v3) + ".apk"
@@ -231,7 +231,7 @@ def uploadavatar():
 				#type = -16 表示上传生活照
 				suffix = str(uuid.uuid4())
 				dst = '/home/www/static/personalimages/' + str(id) + '_' + suffix
-				url = baseURL+"/static/personalimages/' + str(id) + '_' + suffix
+				url = baseURL+"/static/personalimages/" + str(id) + '_' + suffix
 				thumbnail_url = url + "_thumbnail.jpg"
 				tmp = PersonalImage(userid=int(id), url=url, thumbnail_url = thumbnail_url)
 				tmp.add()
