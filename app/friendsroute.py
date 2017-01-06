@@ -176,7 +176,10 @@ def searchuser():
 				state = "successful"
 				reason = ''
 				for search in L:
-					if search.id>1000:
+					#阿里云服务器
+					#if search.id>1000:
+					#自己实验室的服务器
+					if search.id>0:
 						output = {"id":search.id,"name":search.name,"gender":search.gender,"school":search.school} 
 						result.append(output)
 			else:
@@ -184,7 +187,10 @@ def searchuser():
 				state = "successful"
 				reason = ''
 				for search in tempname:
-					if search.id>1000:
+					#阿里云服务器
+					#if search.id>1000:
+					#自己实验室的服务器
+					if search.id>0:
 						output = {"id":search.id,"name":search.name,"gender":search.gender,"school":search.school} 
 						result.append(output)
 		else:
