@@ -56,6 +56,7 @@ def uploadavatar():
 		u = getuserinformation(token)
 		id = u.id
 		result = {}
+		baseURL = "http://121.248.51.210"
 		try:
 			state = 'successful'
 			reason = ''
