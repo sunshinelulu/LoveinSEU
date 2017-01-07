@@ -8,6 +8,7 @@ import string
 from sqlalchemy import Date, cast
 import weme
 from utility import *
+from dbSetting import baseUrl
 
 activity_route = Blueprint('activity_route', __name__)
 
@@ -576,7 +577,7 @@ def getpublishactivitydetail():
 			#获取活动的海报
 			poster = activityimageAttach.query.filter_by(activityid = activityid,imageid = 0).first()
 			if poster != None:
-				image = "http://218.244.147.240:80/activity/activityimages/"+ str(activityid)+'-'+ '0'
+				image = baseUrl+"/activity/activityimages/"+ str(activityid)+'-'+ '0'
 			else:
 				image = ""
 			result = {'id':act.id,'author':author,'authorid':authorid,'school':school,'gender':gender,'title':title,'time':time,'location':location,'number':number,'signnumber':signnumber,'remark':remark,'status':passflag,'detail':detail,'advertise':advertise,'whetherimage':whetherimage,"imageurl":image,'timestate':timestate,'sponsor':sponsor,'top':top}
@@ -679,9 +680,9 @@ def getactivityattentuser():
 	try:
 		"""get user life images"""
 		def lifeimage_url(activityid,userid,imgid):
-			return 'http://218.244.147.240:80/picture/activitylifeimages/' + str(activityid)+'-'+str(userid)+'-'+str(imgid)
+			return baseUrl+'/picture/activitylifeimages/' + str(activityid)+'-'+str(userid)+'-'+str(imgid)
 		def lifeimage_url_thumbnail(activityid,userid,imgid):
-			return 'http://218.244.147.240:80/picture/activitylifeimages/' + str(activityid)+'-'+str(userid)+'-'+str(imgid) + '_thumbnail.jpg'
+			return baseUrl+'/picture/activitylifeimages/' + str(activityid)+'-'+str(userid)+'-'+str(imgid) + '_thumbnail.jpg'
 
 		token = request.json['token']
 		activityid = request.json['activityid']
@@ -928,8 +929,8 @@ def getactivitycomment():
 				thumbnail = []
 				for commentimagetemp in commentimage:
 					number = commentimagetemp.imageid
-					url = "http://218.244.147.240:80/activity/commentactsImage/"+ str(items.activityid) + "-" + str(items.id) + "-" + str(number)
-					urlthum = "http://218.244.147.240:80/activity/commentactsImage/" + str(items.activityid) + "-" + str(items.id) + "-" + str(number) + "_thumbnail.jpg"
+					url = baseUrl+"/activity/commentactsImage/"+ str(items.activityid) + "-" + str(items.id) + "-" + str(number)
+					urlthum = baseUrl+"/activity/commentactsImage/" + str(items.activityid) + "-" + str(items.id) + "-" + str(number) + "_thumbnail.jpg"
 					image.append(url)
 					thumbnail.append(urlthum)
 				#获取回复这条评论的所有评论

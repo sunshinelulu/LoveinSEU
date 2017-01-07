@@ -11,7 +11,7 @@ db = SQLAlchemy()
 sqlurl = "mysql://root:lujuan19950329@121.248.51.210:3306/flasktestdb?charset=utf8"
 #sqlurl = "mysql://root:0596@223.3.36.246:3306/flasktestdb?charset=utf8"
 
-baseURL = "http://121.248.51.210:80"
+baseUrl = "http://121.248.51.210:80"
 def create_app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI']=sqlurl
