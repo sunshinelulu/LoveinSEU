@@ -15,6 +15,7 @@ card_route = Blueprint('card_route', __name__)
 def checkdb(dbNone):
 	return dbNone if dbNone!=None else ''
 
+#发布美食卡片的路由
 @card_route.route("/publishcard",methods=['POST'])
 def publishactivity():
 	try:

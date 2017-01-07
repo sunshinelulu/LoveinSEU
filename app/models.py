@@ -932,7 +932,7 @@ class foodcard(db.Model):
 	title = db.Column(db.String(128))
 	authorid = db.Column(db.Integer,db.ForeignKey('users.id'))
 	imageurl = db.Column(db.String(256))
-	location = db.Column(db.String(32))
+	location = db.Column(db.String(200))
 	longitude = db.Column(db.String(32))
 	latitude = db.Column(db.String(32))
 	price = db.Column(db.String(32))
