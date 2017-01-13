@@ -5,7 +5,7 @@ from models import *
 import models 
 from hashmd5 import *
 import string
-
+from dbSetting import baseUrl
 adminuser_route = Blueprint('adminuser_route', __name__)
 
 #防止数据库为空
@@ -53,7 +53,7 @@ def signup():
 				#获取活动的海报
 				poster = activityimageAttach.query.filter_by(activityid = act.id,imageid = 0).first()
 				if poster != None:
-					image = "http://218.244.147.240:80/activity/activityimages/"+ str(act.id)+'-'+'0'
+					image = baseUrl+"/activity/activityimages/"+ str(act.id)+'-'+'0'
 				else:
 					image = ""
 				output = {'id':act.id,'author':author,'authorid':authorid,'school':school,'gender':gender,'title':title,'time':time,'location':location,'number':number,'signnumber':signnumber,'remark':remark,'detail':detail,'advertise':advertise,'whetherimage':whetherimage,"imageurl":image,'state':passflag}

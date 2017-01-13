@@ -6,6 +6,7 @@ from hashmd5 import *
 import string;
 import datetime
 from push import *
+from dbSetting import baseUrl
 
 personalmessage_route = Blueprint('personalmessage_route', __name__)
 
@@ -270,7 +271,7 @@ def getMessageDetailList():
 				image = []
 				for j in range(len(Limage)):
 					number = Limage[j].image_id
-					url = "http://218.244.147.240:80/message/image/" + str(L[i].id) + "-" + str(number)
+					url = baseUrl+"/message/image/" + str(L[i].id) + "-" + str(number)
 					image.append(url)
 				vedio = ''
 				time = L[i].sendtime

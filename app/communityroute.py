@@ -7,6 +7,7 @@ from hashmd5 import *
 import string
 import weme
 from cache import *
+from dbSetting import baseUrl
 community_route = Blueprint('community_route', __name__)
 
 
@@ -345,8 +346,8 @@ def getpostlist():
 				thumbnail = []
 				for j in range(len(postimage)):
 					number = postimage[j].imageid
-					url = "http://218.244.147.240:80/community/postattachs/" + str(topicid) + "-" + str(postlist[i].id) + "-" + str(number)
-					urlthum = "http://218.244.147.240:80/community/postattachs/" + str(topicid) + "-" + str(postlist[i].id) + "-" + str(number) + "_thumbnail.jpg"
+					url = baseUrl+"/community/postattachs/" + str(topicid) + "-" + str(postlist[i].id) + "-" + str(number)
+					urlthum = baseUrl+"/community/postattachs/" + str(topicid) + "-" + str(postlist[i].id) + "-" + str(number) + "_thumbnail.jpg"
 					image.append(url)
 					thumbnail.append(urlthum)
 				output = {"postid":postlist[i].id,"userid":postlist[i].author.id,"name":name,"school":school,"gender":gender,"timestamp":postlist[i].timestamp,"title":title,"body":body,"likenumber":postlist[i].likenumber,"commentnumber":postlist[i].commentnumber,"imageurl":image,"thumbnail":thumbnail, "certification":certification}
@@ -391,8 +392,8 @@ def getpostdetail():
 			thumbnail = []
 			for j in range(len(postimage)):
 				number = postimage[j].imageid
-				url = "http://218.244.147.240:80/community/postattachs/"+ str(topicid) + "-" + str(post.id) + "-" + str(number)
-				urlthum = "http://218.244.147.240:80/community/postattachs/" + str(topicid) + "-" + str(post.id) + "-" + str(number) + "_thumbnail.jpg"
+				url = baseUrl+"/community/postattachs/"+ str(topicid) + "-" + str(post.id) + "-" + str(number)
+				urlthum = baseUrl+"/community/postattachs/" + str(topicid) + "-" + str(post.id) + "-" + str(number) + "_thumbnail.jpg"
 				image.append(url)
 				thumbnail.append(urlthum)
 			likeuserpage = post.likeusers.order_by(models.likepost.timestamp.desc()).paginate(x, per_page=10, error_out=False)
@@ -426,7 +427,7 @@ def getpostdetail():
 def getusertimeline():
 	"""get user posts"""
 	def postimg_url(p, imgid):
-		return "http://218.244.147.240:80/community/postattachs/" + str(p.topicid) + "-" + str(p.id) + "-" + str(imgid) + "_thumbnail.jpg"
+		return baseUrl+"/community/postattachs/" + str(p.topicid) + "-" + str(p.id) + "-" + str(imgid) + "_thumbnail.jpg"
 	try:
 		token = request.json['token']
 		page = request.json['page']
@@ -455,9 +456,9 @@ def getusertimeline():
 def getuserimages():
 	"""get user posted images"""
 	def postimg_url(p, imgid):
-		return "http://218.244.147.240:80/community/postattachs/" + str(p.topicid) + "-" + str(p.id) + "-" + str(imgid)
+		return baseUrl+"/community/postattachs/" + str(p.topicid) + "-" + str(p.id) + "-" + str(imgid)
 	def postimg_url_thumbnail(p, imgid):
-		return "http://218.244.147.240:80/community/postattachs/" + str(p.topicid) + "-" + str(p.id) + "-" + str(imgid) + "_thumbnail.jpg"
+		return baseUrl+"/community/postattachs/" + str(p.topicid) + "-" + str(p.id) + "-" + str(imgid) + "_thumbnail.jpg"
 
 	try:
 		token = request.json['token']
@@ -505,8 +506,8 @@ def getpostcomment():
 				thumbnail = []
 				for commentimagetemp in commentimage:
 					number = commentimagetemp.imageid
-					url = "http://218.244.147.240:80/community/commentattachs/"+ str(items.post.topicid) + "-" + str(items.id) + "-" + str(number)
-					urlthum = "http://218.244.147.240:80/community/commentattachs/" + str(items.post.topicid) + "-" + str(items.id) + "-" + str(number) + "_thumbnail.jpg"
+					url = baseUrl+"/community/commentattachs/"+ str(items.post.topicid) + "-" + str(items.id) + "-" + str(number)
+					urlthum = baseUrl+"/community/commentattachs/" + str(items.post.topicid) + "-" + str(items.id) + "-" + str(number) + "_thumbnail.jpg"
 					image.append(url)
 					thumbnail.append(urlthum)
 				#获取回复这条评论的所有评论
@@ -616,8 +617,8 @@ def getcommentbycommentid():
 			thumbnail = []
 			for commentimagetemp in commentimage:
 				number = commentimagetemp.imageid
-				url = "http://218.244.147.240:80/community/commentattachs/"+ str(items.post.topicid) + "-" + str(items.id) + "-" + str(number)
-				urlthum = "http://218.244.147.240:80/community/commentattachs/" + str(items.post.topicid) + "-" + str(items.id) + "-" + str(number) + "_thumbnail.jpg"
+				url = baseUrl+"/community/commentattachs/"+ str(items.post.topicid) + "-" + str(items.id) + "-" + str(number)
+				urlthum = baseUrl+"/community/commentattachs/" + str(items.post.topicid) + "-" + str(items.id) + "-" + str(number) + "_thumbnail.jpg"
 				image.append(url)
 				thumbnail.append(urlthum)		
 			#获取回复这条评论的所有评论

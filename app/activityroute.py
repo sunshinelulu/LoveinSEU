@@ -12,6 +12,7 @@ from dbSetting import baseUrl
 
 activity_route = Blueprint('activity_route', __name__)
 
+#用户进行活动报名路由。
 @activity_route.route("/signup",methods=['POST'])
 def signup():
 	try:
@@ -40,7 +41,7 @@ def signup():
 	response = jsonify({'state':state,
 		                'reason':reason})
 	return response
-
+#取消活动的报名
 @activity_route.route("/deletesignup",methods=['POST'])
 def deletesignup():
 	try:
@@ -71,7 +72,7 @@ def deletesignup():
 	return response
 
 
-
+#在活动首页得到活动的信息，形成一个列表显示在活动主界面上。
 @activity_route.route("/getactivityinformation",methods=['POST'])
 def getactivityinformation():
 	try:
@@ -127,7 +128,7 @@ def getactivityinformation():
 						'state':state,
 						'reason':reason})
 	return response
-
+#发布活动，活动发布成功返回建立的活动id。
 @activity_route.route("/publishactivity",methods=['POST'])
 def publishactivity():
 	try:
@@ -173,7 +174,7 @@ def publishactivity():
 						'id':id})
 	return response
 
-#1.活动置顶图片连接
+#获得指定活动的路由信息，在活动主界面上轮番播放的几个活动。
 @activity_route.route("/activitytopofficial",methods=['POST'])
 def activitytopofficial():
 	try:
@@ -202,6 +203,8 @@ def activitytopofficial():
 						'state':state,
 						'reason':reason})
 	return response
+
+#得到每个活动详细信息的路由请求。
 @activity_route.route("/getactivitydetail",methods=['POST'])
 def getactivitydetail():
 	try:
@@ -257,6 +260,7 @@ def getactivitydetail():
 						'state':state,
 						'reason':reason})
 	return response
+#关注某一个活动路由
 @activity_route.route("/likeactivity",methods=['POST'])
 def likeactivity():
 	try:
@@ -294,6 +298,7 @@ def likeactivity():
 						'reason':reason,
 						'likenumber':likenumber})
 	return response 
+#取消对某一个活动的关注。
 @activity_route.route("/unlikeactivity",methods=['POST'])
 def unlikeactivity():
 	try:
@@ -331,6 +336,7 @@ def unlikeactivity():
 						'reason':reason,
 						'likenumber':likenumber})
 	return response 
+#搜索活动
 @activity_route.route("/searchactivity",methods = ['GET','POST'])
 def searchactivity():
 	try:
@@ -378,7 +384,8 @@ def searchactivity():
 						'reason':reason,
 						'result':result})
 	return response
-#返回喜欢的活动
+
+#返回关注的活动
 @activity_route.route("/getlikeactivity",methods=['POST'])
 def getlikeactivity():
 	try:
@@ -431,7 +438,8 @@ def getlikeactivity():
 						'state':state,                                                                                                                                                                                  
 						'reason':reason})
 	return response
-#返回参加的活动
+
+#返回报名的活动
 @activity_route.route("/getattentactivity",methods=['POST'])
 def getattentactivity():
 	try:
@@ -485,7 +493,8 @@ def getattentactivity():
 						'state':state,                                                                                                                                                                                  
 						'reason':reason})
 	return response
-#返回发布的活动
+
+#返回发布的活动，这里是指所有的活动，无论是审核通过的还是正在审核还是被拒绝的活动。
 @activity_route.route("/getpublishactivity",methods=['POST'])
 def getpublishactivity():
 	try:
@@ -541,7 +550,8 @@ def getpublishactivity():
 						'pages':pages,                                                                                                                                                                               
 						'reason':reason})
 	return response
-#获取发布的活动的信息
+
+#获取被用户发布的活动的详细信息。
 @activity_route.route("/getpublishactivitydetail",methods=['POST'])
 def getpublishactivitydetail():
 	try:
@@ -598,7 +608,7 @@ def getpublishactivitydetail():
 						'reason':reason})
 	return response
 
-
+#得到活动的的统计信息。
 @activity_route.route("/getactivitystatistic", methods=['POST'])
 def getactivitystatistic():
 	"""get activity statistic information"""
@@ -637,6 +647,7 @@ def getactivitystatistic():
 
 	return jsonify({'state':state, 'reason':reason, 'result':result})
 
+#检测用户对某个活动的权限
 @activity_route.route("/validateactivityuser", methods=['POST'])
 def validatectivityuser():
 	"""valid user for activity"""
@@ -674,7 +685,7 @@ def validatectivityuser():
 
 	return jsonify({'state':state, 'reason':reason, 'result':result})
 
-
+#得到报名某个活动的用户。
 @activity_route.route("/getactivityattentuser",methods=['POST'])
 def getactivityattentuser():
 	try:
@@ -730,7 +741,7 @@ def getactivityattentuser():
 						'pages':pages,                                                                                                                                                                              
 						'reason':reason})
 	return response
-
+#邀请用户参加某个活动，一个或多个用户
 @activity_route.route("/setpassuser",methods=['POST'])
 def setpassuser():
 	try:
@@ -759,7 +770,7 @@ def setpassuser():
 	response = jsonify({'state':state,                                                                                                                                                                                  
 						'reason':reason})
 	return response
-
+#拒绝用户参加某个活动，一个用户或多个用户。
 @activity_route.route("/deletepassuser",methods=['POST'])
 def deletepassuser():
 	try:
@@ -833,7 +844,7 @@ def commenttoactivity():
 						'commentnumber':commentnumber,
 						'id':id})
 	return response
-
+#对活动的评论进行评论。
 @activity_route.route("/commenttocommentact",methods=['POST'])
 def commenttocommentact():
 	try:
@@ -867,7 +878,7 @@ def commenttocommentact():
 						'reason':reason,
 						'id':id})
 	return response
-
+#对活动的某个评论点赞
 @activity_route.route("/likecommentact",methods=['POST'])
 def likecommentact():
 	try:
